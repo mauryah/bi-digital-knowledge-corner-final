@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150">
+<rect width="300" height="150" rx="22" fill="#EAF5FF"/>
+<rect x="46" y="43" width="135" height="70" rx="9" fill="#0B6FB0" transform="rotate(-7 46 43)"/>
+<rect x="92" y="35" width="150" height="76" rx="9" fill="#55BDE0" transform="rotate(8 92 35)"/>
+<circle cx="166" cy="75" r="23" fill="#fff" opacity=".9"/>
+<text x="166" y="85" text-anchor="middle" font-family="Arial" font-size="28" font-weight="800" fill="#0B6FB0">Rp</text>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#0B75B5"/>
+    <stop offset="1" stop-color="#53C7E8"/>
+  </linearGradient>
+  <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#EAF8FF"/>
+    <stop offset="1" stop-color="#9CCFE7"/>
+  </linearGradient>
+  <linearGradient id="building" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F8FCFF"/>
+    <stop offset="1" stop-color="#B9D7E6"/>
+  </linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#003A61" flood-opacity=".18"/>
+  </filter>
+</defs>
+
+<rect width="900" height="620" rx="34" fill="url(#sky)"/>
+
+<!-- soft clouds -->
+<g fill="#FFFFFF" opacity=".18">
+  <ellipse cx="110" cy="105" rx="105" ry="28"/>
+  <ellipse cx="190" cy="115" rx="80" ry="22"/>
+  <ellipse cx="700" cy="85" rx="120" ry="30"/>
+  <ellipse cx="790" cy="98" rx="75" ry="22"/>
+</g>
+
+<!-- skyline -->
+<g opacity=".28" fill="#DDF4FF">
+  <rect x="40" y="245" width="82" height="375" rx="4"/>
+  <rect x="130" y="205" width="66" height="415" rx="4"/>
+  <rect x="210" y="280" width="75" height="340" rx="4"/>
+  <rect x="650" y="235" width="72" height="385" rx="4"/>
+  <rect x="735" y="190" width="60" height="430" rx="4"/>
+  <rect x="808" y="255" width="52" height="365" rx="4"/>
+</g>
+
+<!-- main building -->
+<g filter="url(#shadow)">
+  <path d="M290 180 L575 180 L640 235 L640 620 L290 620 Z" fill="url(#building)"/>
+  <path d="M290 180 L430 95 L575 180 Z" fill="#F5FBFF"/>
+  <path d="M335 215 L595 215 L595 620 L335 620 Z" fill="url(#glass)"/>
+</g>
+
+<!-- vertical facade -->
+<g fill="#0A5B87" opacity=".45">
+  <rect x="350" y="225" width="8" height="395"/>
+  <rect x="405" y="225" width="8" height="395"/>
+  <rect x="460" y="225" width="8" height="395"/>
+  <rect x="515" y="225" width="8" height="395"/>
+  <rect x="570" y="225" width="8" height="395"/>
+</g>
+
+<!-- horizontal windows -->
+<g stroke="#FFFFFF" stroke-width="5" opacity=".78">
+  <line x1="338" y1="275" x2="592" y2="275"/>
+  <line x1="338" y1="335" x2="592" y2="335"/>
+  <line x1="338" y1="395" x2="592" y2="395"/>
+  <line x1="338" y1="455" x2="592" y2="455"/>
+  <line x1="338" y1="515" x2="592" y2="515"/>
+</g>
+
+<!-- BI-like circular monogram, deliberately generic prototype mark -->
+<g transform="translate(425 135)">
+  <circle r="42" fill="#07588A" stroke="#FFFFFF" stroke-width="5"/>
+  <text x="0" y="13" text-anchor="middle" font-family="Arial, sans-serif"
+        font-size="38" font-weight="800" fill="#FFFFFF">BI</text>
+</g>
+
+<!-- foreground trees -->
+<g>
+  <rect x="95" y="485" width="16" height="135" fill="#6A4A35"/>
+  <circle cx="103" cy="470" r="78" fill="#0D8D71" opacity=".92"/>
+  <circle cx="58" cy="500" r="52" fill="#17A27F" opacity=".9"/>
+  <circle cx="150" cy="505" r="55" fill="#087C68" opacity=".92"/>
+
+  <rect x="700" y="500" width="15" height="120" fill="#6A4A35"/>
+  <circle cx="708" cy="475" r="75" fill="#0D8D71" opacity=".92"/>
+  <circle cx="670" cy="510" r="45" fill="#17A27F" opacity=".9"/>
+  <circle cx="750" cy="505" r="48" fill="#087C68" opacity=".92"/>
+</g>
+
+<!-- foreground -->
+<path d="M0 570 C160 515 270 590 420 560 C560 530 690 535 900 565 L900 620 L0 620 Z"
+      fill="#E8F8FC" opacity=".9"/>
+</svg>
