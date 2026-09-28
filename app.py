@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 BASE_DIR = Path(__file__).parent
-ASSET_DIR = BASE_DIR / "assets"
+ASSET_DIR = BASE_DIR / "assets" if (BASE_DIR / "assets").exists() else BASE_DIR
 DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
