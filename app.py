@@ -627,7 +627,22 @@ pages = [
     "ℹ️ Tentang",
 ]
 
-page = st.sidebar.radio("Navigasi", pages, label_visibility="collapsed")
+# Navigasi dibuat berbasis session state agar tombol di halaman
+# (misalnya "Pelajari") benar-benar berpindah halaman.
+if "page" not in st.session_state:
+    st.session_state["page"] = "🏠 Beranda"
+
+current_page = st.session_state["page"]
+if current_page not in pages:
+    current_page = pages[0]
+
+page = st.sidebar.radio(
+    "Navigasi",
+    pages,
+    index=pages.index(current_page),
+    label_visibility="collapsed",
+)
+st.session_state["page"] = page
 
 st.sidebar.markdown("""
 <div class="sidebar-bottom">
@@ -659,8 +674,8 @@ if page == "🏠 Beranda":
             </div>
             <div class="search-box">
                 <span class="search-icon">⌕</span>
-                <span class="search-placeholder">Apa yang ingin kamu cari?</span>
-                <span class="search-pill">Cari →</span>
+                <span class="search-placeholder">Gunakan pencarian di bawah untuk menemukan topik...</span>
+                <span class="search-pill">Cari</span>
             </div>
             <div class="hero-mini-row">
                 <div class="hero-mini">📚 Ringkasan informasi</div>
@@ -671,6 +686,26 @@ if page == "🏠 Beranda":
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+    # Pencarian yang benar-benar aktif
+    with st.form("home_search_form"):
+        s1, s2 = st.columns([5, 1])
+        with s1:
+            home_query = st.text_input(
+                "Cari informasi",
+                placeholder="Contoh: Rupiah, QRIS, inflasi, pangan, data...",
+                label_visibility="collapsed",
+            )
+        with s2:
+            search_submit = st.form_submit_button("🔎 Cari", use_container_width=True)
+
+    if search_submit:
+        if home_query.strip():
+            st.session_state["search_query"] = home_query.strip()
+            st.session_state["page"] = "🔎 Cari Informasi"
+            st.rerun()
+        else:
+            st.info("Masukkan kata kunci terlebih dahulu.")
 
     st.markdown("""
     <div class="section-title">Jelajahi berdasarkan topik</div>
@@ -745,9 +780,11 @@ elif page == "🔎 Cari Informasi":
 
     query = st.text_input(
         "Kata kunci",
+        value=st.session_state.get("search_query", ""),
         placeholder="Contoh: Rupiah, QRIS, inflasi, pangan, data...",
         label_visibility="collapsed",
     )
+    st.session_state["search_query"] = query
 
     if query:
         results = []
@@ -762,10 +799,10 @@ elif page == "🔎 Cari Informasi":
             for name, item in results:
                 img = svg_data_uri(item["image"])
                 st.markdown(f"""
-                <div class="detail-hero" style="margin-bottom:12px;">
+                <div class="detail-hero" style="margin-bottom:8px;">
                     <div style="display:flex;gap:16px;align-items:center;padding:12px;">
                         <img src="{img}" style="width:115px;height:80px;object-fit:cover;border-radius:10px;">
-                        <div>
+                        <div style="flex:1;">
                             <div class="detail-tag">{item["tag"]}</div>
                             <div class="detail-title" style="font-size:1.15rem;">{item["icon"]} {name}</div>
                             <div class="detail-short">{item["short"]}</div>
@@ -773,6 +810,10 @@ elif page == "🔎 Cari Informasi":
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
+                if st.button(f"Pelajari {name} →", key=f"search_open_{name}", use_container_width=True):
+                    st.session_state["selected_topic"] = name
+                    st.session_state["page"] = "📚 Jelajah Topik"
+                    st.rerun()
         else:
             st.info("Topik belum ditemukan. Coba gunakan kata kunci lain.")
 
